@@ -3,7 +3,7 @@
 
 module adder_array_tb;
   parameter BITWIDTH = 32;
-  parameter TESTCOUNT = 32;
+  parameter TESTCOUNT = 4;
 
   reg [2:0] cmd;
   reg [BITWIDTH-1:0] ain0, ain1, ain2, ain3, bin0, bin1, bin2, bin3;
