@@ -1,10 +1,10 @@
 module my_add #(
-	parameter BITWIDTH = 32
+	parameter BIT_WIDTH = 32
 )
 (
-	input [BITWIDTH-1:0] ain,
-	input [BITWIDTH-1:0] bin,
-	output [BITWIDTH-1:0] dout,
+	input [BIT_WIDTH-1:0] ain,
+	input [BIT_WIDTH-1:0] bin,
+	output [BIT_WIDTH-1:0] dout,
 	output overflow
 );
 

@@ -2,11 +2,11 @@
 `include "my_mul.v"
 
 module my_mul_tb;
-  parameter BITWIDTH = 32;
-  parameter TESTCOUNT = 8;
+  parameter BIT_WIDTH = 32;
+  parameter TEST_COUNT = 8;
 
-  reg [BITWIDTH-1:0] ain, bin;
-  wire [BITWIDTH-1:0] dout;
+  reg [BIT_WIDTH-1:0] ain, bin;
+  wire [BIT_WIDTH-1:0] dout;
   wire overflow;
 
   my_mul UUT(ain, bin, dout, overflow);
@@ -19,7 +19,7 @@ module my_mul_tb;
 
     $dumpfile("my_mul_tb.vcd");
     $dumpvars(0, my_mul_tb);
-    for (i=0; i<TESTCOUNT; i=i+1) begin
+    for (i=0; i<TEST_COUNT; i=i+1) begin
       ain = $random%'hffff;
       bin = $random%'hfffff;
       #10;

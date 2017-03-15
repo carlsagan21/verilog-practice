@@ -1,15 +1,15 @@
 module my_mul #(
-	parameter BITWIDTH = 32
+	parameter BIT_WIDTH = 32
 )
 (
-	input [BITWIDTH-1:0] ain,
-	input [BITWIDTH-1:0] bin,
-	output [BITWIDTH-1:0] dout,
+	input [BIT_WIDTH-1:0] ain,
+	input [BIT_WIDTH-1:0] bin,
+	output [BIT_WIDTH-1:0] dout,
 	output overflow
 );
 
-wire [BITWIDTH*2-1:0] result = ain * bin;
+wire [BIT_WIDTH*2-1:0] result = ain * bin;
 
-assign {overflow, dout} = {|result[BITWIDTH*2-1:BITWIDTH], result[BITWIDTH-1:0]};
+assign {overflow, dout} = {|result[BIT_WIDTH*2-1:BIT_WIDTH], result[BIT_WIDTH-1:0]};
 
 endmodule

@@ -1,23 +1,23 @@
 `include "my_mul.v"
 
 module my_mac #(
-	parameter BITWIDTH = 32
+	parameter BIT_WIDTH = 32
 )
 (
-	input [BITWIDTH-1:0] ain,
-	input [BITWIDTH-1:0] bin,
+	input [BIT_WIDTH-1:0] ain,
+	input [BIT_WIDTH-1:0] bin,
   input en,
-	output [BITWIDTH-1:0] dout,
+	output [BIT_WIDTH-1:0] dout,
 	output overflow
 );
 
-wire [BITWIDTH-1:0] mul_result;
+wire [BIT_WIDTH-1:0] mul_result;
 wire mul_overflow;
 
 my_mul my_mul_impl(ain, bin, mul_result, mul_overflow);
 
-// reg [BITWIDTH*2-1:0] sum = sum + ain * bin;
-reg [BITWIDTH:0] sum;
+// reg [BIT_WIDTH*2-1:0] sum = sum + ain * bin;
+reg [BIT_WIDTH:0] sum;
 
 initial begin
 
@@ -27,6 +27,6 @@ always @ (en or ain or bin) begin
   sum = sum + mul_result;
 end
 
-// assign {overflow, dout} = {|result[BITWIDTH*2-1:BITWIDTH], result[BITWIDTH-1:0]};
+// assign {overflow, dout} = {|result[BIT_WIDTH*2-1:BIT_WIDTH], result[BIT_WIDTH-1:0]};
 
 endmodule
