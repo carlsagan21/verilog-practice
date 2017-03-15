@@ -1,4 +1,3 @@
-// Verilog test bench for example_3_1
 `timescale 1ns/100ps
 `include "my_mul.v"
 

@@ -31,9 +31,6 @@ module adder_array (cmd, ain0, ain1, ain2, ain3, bin0, bin1, bin2, bin3, dout0, 
 
   always @ ( * ) begin
     for (j=0; j<5; j=j+1) begin
-      // if (cmd == j) begin
-      //   {dout3, dout2, dout1, dout0} = {dout[BIT_WIDTH*(j+1)-1 : BIT_WIDTH*j], {(BIT_WIDTH*j){'b0}}};
-      // end
       if (cmd == 3'b000) begin
         {dout3, dout2, dout1, dout0} = {{(BIT_WIDTH*3){1'b0}}, dout[(BIT_WIDTH*1)-1 : (BIT_WIDTH*0)], {(BIT_WIDTH*0){1'b0}}};
         overflow = {{3{1'b0}}, temp_overflow[0], {0{1'b0}}};
@@ -57,24 +54,7 @@ module adder_array (cmd, ain0, ain1, ain2, ain3, bin0, bin1, bin2, bin3, dout0, 
       else begin
         $display("invalid cmd: %d", cmd);
       end
-
-      // case (cmd)
-      //   3'b000:
-      //     {dout3, dout2, dout1, dout0} = {{(BIT_WIDTH*3){1'b0}}, dout[(BIT_WIDTH*1)-1 : (BIT_WIDTH*0)], {(BIT_WIDTH*0){1'b0}}};
-      //     overflow = temp_overflow[0];
-      //   3'b001: {dout3, dout2, dout1, dout0} = {{(BIT_WIDTH*2){1'b0}}, dout[(BIT_WIDTH*2)-1 : (BIT_WIDTH*1)], {(BIT_WIDTH*1){1'b0}}};
-      //   3'b010: {dout3, dout2, dout1, dout0} = {{(BIT_WIDTH*1){1'b0}}, dout[(BIT_WIDTH*3)-1 : (BIT_WIDTH*2)], {(BIT_WIDTH*2){1'b0}}};
-      //   3'b011: {dout3, dout2, dout1, dout0} = {{(BIT_WIDTH*0){1'b0}}, dout[(BIT_WIDTH*4)-1 : (BIT_WIDTH*3)], {(BIT_WIDTH*3){1'b0}}};
-      //   3'b100:
-      //     {dout3, dout2, dout1, dout0} = dout;
-      //     overflow = temp_overflow;
-      //   default: {dout3, dout2, dout1, dout0} = dout;
-      // endcase
     end
-
-    // case (cmd)
-    //   3'b000: {dout3, dout2, dout1, dout0} = {dout[]};
-    //   default: dout = 0;
   end
 
 endmodule

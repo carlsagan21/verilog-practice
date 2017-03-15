@@ -1,4 +1,3 @@
-// Verilog test bench for example_3_1
 `timescale 1ns/100ps
 `include "adder_array.v"
 
@@ -16,23 +15,10 @@ module adder_array_tb;
   integer i, j;
 
   initial begin
-    // ain0 = 0;
-    // ain1 = 0;
-    // ain2 = 0;
-    // ain3 = 0;
-    // bin0 = 0;
-    // bin1 = 0;
-    // bin2 = 0;
-    // bin3 = 0;
-
     $dumpfile("adder_array_tb.vcd");
     $dumpvars(0, adder_array_tb);
 
     for (i=0; i<TESTCOUNT; i=i+1) begin
-      // for (j=0; j<4; j=j+1) begin
-      //   ain = $random%'hffffffff;
-      //   bin = $random%'hffffffff;
-      // end
       cmd = i%5;
       ain0 = $random%'hffffffff;
       ain1 = $random%'hffffffff;
