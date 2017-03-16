@@ -11,22 +11,28 @@ module my_mac #(
 	output overflow
 );
 
-wire [BIT_WIDTH-1:0] mul_result;
-wire mul_overflow;
-
-my_mul my_mul_impl(ain, bin, mul_result, mul_overflow);
-
-// reg [BIT_WIDTH*2-1:0] sum = sum + ain * bin;
-reg [BIT_WIDTH:0] sum;
+reg [BIT_WIDTH-1:0] sum;
+reg [BIT_WIDTH*2-1:0] cal_result;
+reg over_reg;
+assign overflow = over_reg;
+assign dout = sum;
 
 initial begin
-
+	sum = 0;
+	cal_result = 0;
+	over_reg = 0;
 end
 
-always @ (en or ain or bin) begin
-  sum = sum + mul_result;
+always @(en or ain or bin) begin
+	if (en) begin
+		cal_result = sum + ain * bin;
+		over_reg = |cal_result[BIT_WIDTH * 2 - 1 : BIT_WIDTH];
+		sum = cal_result[BIT_WIDTH - 1 : 0];
+	end
+	else begin
+		sum = 0;
+		over_reg = 0;
+	end
 end
-
-// assign {overflow, dout} = {|result[BIT_WIDTH*2-1:BIT_WIDTH], result[BIT_WIDTH-1:0]};
 
 endmodule

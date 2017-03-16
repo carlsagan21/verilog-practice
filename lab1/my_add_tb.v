@@ -2,31 +2,32 @@
 `include "my_add.v"
 
 module my_add_tb;
-  parameter BIT_WIDTH = 32;
-  parameter TEST_COUNT = 8;
+    parameter BIT_WIDTH = 32;
+    parameter TEST_COUNT = 8;
 
-  reg [BIT_WIDTH-1:0] ain, bin;
-  wire [BIT_WIDTH-1:0] dout;
-  wire overflow;
+    reg [BIT_WIDTH-1:0] ain, bin;
+    wire [BIT_WIDTH-1:0] dout;
+    wire overflow;
 
-  my_add UUT(ain, bin, dout, overflow);
+    my_add UUT(ain, bin, dout, overflow);
 
-  integer i;
+    integer i;
 
-  initial begin
-    ain = 'hffffffff;
-    bin = 'h1;
+    initial begin
+        ain = 'hffffffff;
+        bin = 'h1;
 
-    $dumpfile("my_add_tb.vcd");
-    $dumpvars(0, my_add_tb);
-    for (i=0; i<TEST_COUNT; i=i+1) begin
-      ain = $random%'hffffffff;
-      bin = $random%'hffffffff;
-      #10;
-      $display("ain: %h / bin: %h / dout: %h / overflow: %h", ain, bin, dout, overflow);
+        $dumpfile("my_add_tb.vcd");
+        $dumpvars(0, my_add_tb);
+
+        for (i=0; i<TEST_COUNT; i=i+1) begin
+          ain = $urandom%'hffffffff;
+          bin = $urandom%'hffffffff;
+          #10;
+          $display("ain: %h / bin: %h / dout: %h / overflow: %h", ain, bin, dout, overflow);
+        end
+
+        $finish;
     end
-
-    $finish;
-  end
 
 endmodule

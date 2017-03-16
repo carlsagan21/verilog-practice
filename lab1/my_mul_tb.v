@@ -20,8 +20,8 @@ module my_mul_tb;
     $dumpfile("my_mul_tb.vcd");
     $dumpvars(0, my_mul_tb);
     for (i=0; i<TEST_COUNT; i=i+1) begin
-      ain = $random%'hffff;
-      bin = $random%'hfffff;
+      ain = $urandom%'hffff;
+      bin = $urandom%'hfffff;
       #10;
       $display("ain: %h / bin: %h / dout: %h / overflow: %h", ain, bin, dout, overflow);
     end
