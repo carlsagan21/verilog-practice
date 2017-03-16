@@ -1,22 +1,22 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
+// Company:
+// Engineer:
+//
 // Create Date: 03/16/2017 11:04:45 AM
-// Design Name: 
+// Design Name:
 // Module Name: IP_floating
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -26,11 +26,8 @@ module IP_floating(
     input [31:0] ain, bin, cin,
     output [31:0]res
     );
-    
-//    reg [31:0] ain;
-//    reg [31:0] bin;
-    
-    floating_point_MAC UUT(
+
+    floating_point_MAC UUT( // from IP catalog
         .aclk(clk),
         .aresetn(~rst),
         .s_axis_a_tvalid(1'b1),
@@ -42,5 +39,5 @@ module IP_floating(
         .m_axis_result_tvalid(dvalid),
         .m_axis_result_tdata(res)
     );
-    
+
 endmodule
