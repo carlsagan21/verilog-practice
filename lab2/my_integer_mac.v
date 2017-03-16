@@ -28,7 +28,6 @@ module my_integer_mac(
 
     wire [31:0] sum;
 
-
     mult_gen_MAC multi( // from IP catalog
         .A(ain),
         .B(bin),
