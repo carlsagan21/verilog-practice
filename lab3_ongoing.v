@@ -1,22 +1,22 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
+// Company:
+// Engineer:
+//
 // Create Date: 03/22/2017 01:22:17 PM
-// Design Name: 
+// Design Name:
 // Module Name: my_BRAM
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -37,13 +37,22 @@ module my_BRAM # (
   reg [31:0] mem[0:8191];
   wire [BRAM_ADDR_WIDTH-3:0] addr = BRAM_ADDR[BRAM_ADDR_WIDTH-1:2];
   reg [31:0] dout;
+
+  reg [31:0] read_waiting;
+
   //codes for simulation
   initial begin
+    read_waiting = 0;
+    integer k;
+    for (k = 0; k < 8192; k = k + 1) begin
+        mem[k] = 0;
+    end
+
     if (INIT_FILE != "") begin
         #10;// read data
-    end  ___________________________________________  //read data from INIT_FILE and store them into mem
-    
-    
+    end  // ___________________________________________  //read data from INIT_FILE and store them into mem
+
+
 //    wait (done) _______________________________________________  //write data stored in mem into OUT_FILE
   end
   //code for BRAM implementation
@@ -76,6 +85,6 @@ module my_BRAM # (
         end
     end
   end
-  
+
 
 endmodule

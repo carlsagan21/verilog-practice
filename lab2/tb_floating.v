@@ -39,8 +39,7 @@ module tb_floating;
         bin = 0;
         cin = 0;
         clk = 0;
-        forever
-        begin
+        forever begin
             #10
             clk = ~clk;
         end
