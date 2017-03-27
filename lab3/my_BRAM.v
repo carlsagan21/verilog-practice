@@ -22,8 +22,8 @@
 
 module my_BRAM # (
   parameter integer BRAM_ADDR_WIDTH = 15, // 4x8192
-  parameter INIT_FILE = "input.txt",
-  parameter OUT_FILE = "output.txt"
+  parameter INIT_FILE = "",
+  parameter OUT_FILE = ""
 )(
   input wire [BRAM_ADDR_WIDTH-1:0] BRAM_ADDR,
   input wire BRAM_CLK,
@@ -40,20 +40,26 @@ module my_BRAM # (
 
   reg [31:0] read_waiting;
 
+  integer k;
+
   //codes for simulation
   initial begin
     read_waiting = 0;
-    integer k;
+    dout = 0;
     for (k = 0; k < 8192; k = k + 1) begin
-        mem[k] = 0;
+      mem[k] = 0;
     end
 
     if (INIT_FILE != "") begin
-        #10;// read data
-    end  // ___________________________________________  //read data from INIT_FILE and store them into mem
+        // read data
+        $readmemh(INIT_FILE, mem);
+    end // ___________________________________________  //read data from INIT_FILE and store them into mem
 
-
-//    wait (done) _______________________________________________  //write data stored in mem into OUT_FILE
+    if (OUT_FILE != "") begin
+        wait (done) begin
+           $writememh(OUT_FILE, mem);
+        end // _______________________________________________  //write data stored in mem into
+    end
   end
   //code for BRAM implementation
   always @(posedge BRAM_CLK or BRAM_RST) begin
@@ -62,8 +68,13 @@ module my_BRAM # (
     end
     else begin
         if (BRAM_EN) begin
+//           if (read_waiting != 0) begin
+             BRAM_RDDATA = read_waiting;
+//             read_waiting = 0;
+//           end
            if (BRAM_WE == 0) begin
-             BRAM_RDDATA = mem[addr];
+             read_waiting = mem[addr];
+//             BRAM_RDDATA = mem[addr];
            end
            else begin
                if(BRAM_WE[0]) begin
@@ -81,7 +92,7 @@ module my_BRAM # (
            end
         end
         else begin
-            // ?
+            // EN 이 0일때
         end
     end
   end
