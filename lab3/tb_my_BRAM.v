@@ -81,7 +81,7 @@ initial begin
 end
 
 initial begin
-    #1;
+    #5;
     enable[0] = 1;
     enable[1] = 1;
     write_enable[0] = 0;
